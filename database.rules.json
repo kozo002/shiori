@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "plans": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
