@@ -16,6 +16,7 @@
   import { toDateInputValue } from '$lib/utils/toDateInputValue'
   import { toDate } from '$lib/utils/toDate'
   import Button from './components/ui/button/button.svelte'
+  import Input from '$lib/components/ui/input/input.svelte'
 
   type Props = {
     planDate: PlanDate | undefined
@@ -65,13 +66,16 @@
   }
 </script>
 
-<div class="flex">
-  <form on:submit="{handleSubmit}">
-    <input
+<div class="flex gap-x-2">
+  <form
+    class="flex gap-x-2"
+    on:submit="{handleSubmit}"
+  >
+    <Input
       type="text"
       bind:value="{title}"
     />
-    <input
+    <Input
       type="date"
       bind:value="{date}"
     />

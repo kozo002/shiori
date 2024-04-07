@@ -15,6 +15,7 @@
   import type { PlanEvent } from '$lib/types'
   import { toDate } from '$lib/utils/toDate'
   import Button from '$lib/components/ui/button/button.svelte'
+  import Input from '$lib/components/ui/input/input.svelte'
 
   const dispatchEvent = createEventDispatcher<{
     save: PlanEventSavePayload
@@ -64,13 +65,16 @@
   }
 </script>
 
-<div style="display: flex">
-  <form on:submit="{handleSubmit}">
-    <input
+<div class="flex pl-4 pt-2 gap-x-2">
+  <form
+    class="flex gap-x-2"
+    on:submit="{handleSubmit}"
+  >
+    <Input
       type="text"
       bind:value="{title}"
     />
-    <input
+    <Input
       type="time"
       bind:value="{time}"
     />

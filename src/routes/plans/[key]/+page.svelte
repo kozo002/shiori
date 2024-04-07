@@ -92,46 +92,48 @@
 </script>
 
 {#if plan !== undefined}
-  <PlanEditor
-    title={plan.title}
-    on:save={handlePlanEditorSubmit}
-  />
+  <div class="container flex flex-col gap-y-4">
+    <PlanEditor
+      title={plan.title}
+      on:save={handlePlanEditorSubmit}
+    />
 
-  {#each planDates as planDate (planDate.key)}
-    <div>
-      <PlanDateEditor
-        planDate={planDate}
-        key={planDate.key}
-        on:save={handlePlanDateEditorSubmit}
-        on:delete={handlePlanDateEditorDelete}
-      />
-      <ul>
-        {#if planEvents[planDate.key] !== undefined}
-          {#each planEvents[planDate.key] as planEvent (planEvent.key)}
-            <li>
-              <PlanEventEditor
-                baseDate="{toDate(planDate.date)}"
-                planEvent="{planEvent}"
-                key="{planEvent.key}"
-                on:save="{(e) => handlePlanEventEditorSave(e.detail, planDate)}"
-                on:delete="{(e) => handlePlanEventEditorDelete(e.detail, planDate)}"
-              />
-            </li>
-          {/each}
-        {/if}
-        <li>
-          <PlanEventEditor
-            baseDate="{toDate(planDate.date)}"
-            on:save="{(e) => handlePlanEventEditorSave(e.detail, planDate)}"
-          />
-        </li>
-      </ul>
-    </div>
-  {/each}
+    {#each planDates as planDate (planDate.key)}
+      <div>
+        <PlanDateEditor
+          planDate={planDate}
+          key={planDate.key}
+          on:save={handlePlanDateEditorSubmit}
+          on:delete={handlePlanDateEditorDelete}
+        />
+        <ul>
+          {#if planEvents[planDate.key] !== undefined}
+            {#each planEvents[planDate.key] as planEvent (planEvent.key)}
+              <li>
+                <PlanEventEditor
+                  baseDate="{toDate(planDate.date)}"
+                  planEvent="{planEvent}"
+                  key="{planEvent.key}"
+                  on:save="{(e) => handlePlanEventEditorSave(e.detail, planDate)}"
+                  on:delete="{(e) => handlePlanEventEditorDelete(e.detail, planDate)}"
+                />
+              </li>
+            {/each}
+          {/if}
+          <li>
+            <PlanEventEditor
+              baseDate="{toDate(planDate.date)}"
+              on:save="{(e) => handlePlanEventEditorSave(e.detail, planDate)}"
+            />
+          </li>
+        </ul>
+      </div>
+    {/each}
 
-  <PlanDateEditor
-    planDate={undefined}
-    key={undefined}
-    on:save={handlePlanDateEditorSubmit}
-  />
+    <PlanDateEditor
+      planDate={undefined}
+      key={undefined}
+      on:save={handlePlanDateEditorSubmit}
+    />
+  </div>
 {/if}

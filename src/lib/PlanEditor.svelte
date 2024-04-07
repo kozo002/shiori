@@ -7,6 +7,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
   import Button from '$lib/components/ui/button/button.svelte'
+  import Input from '$lib/components/ui/input/input.svelte'
 
   type Props = {
     title: string
@@ -24,8 +25,11 @@
   }
 </script>
 
-<form on:submit="{handlePlanFormSubmit}">
-  <input
+<form
+  class="flex gap-x-2"
+  on:submit="{handlePlanFormSubmit}"
+>
+  <Input
     type="text"
     bind:value="{title}"
   />
