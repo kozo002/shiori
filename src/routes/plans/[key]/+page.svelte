@@ -13,6 +13,7 @@
 
   import PlanEditor from '$lib/PlanEditor.svelte';
   import PlanDateEditor from '$lib/PlanDateEditor.svelte'
+  import type { PlanDateSavePayload, PlanDateDeletePayload } from '$lib/PlanDateEditor.svelte';
   import PlanEventEditor from '$lib/PlanEventEditor.svelte'
   import type { PlanEventSavePayload, PlanEventDeletePayload } from '$lib/PlanEventEditor.svelte'
 
@@ -51,7 +52,7 @@
     await set(planRef, { title: e.detail.planTitle })
   }
 
-  async function handlePlanDateEditorSubmit(e: CustomEvent<{ title: string, date: Date, key?: string }>) {
+  async function handlePlanDateEditorSubmit(e: CustomEvent<PlanDateSavePayload>) {
     const { title, date, key } = e.detail
     if (key === undefined) {
       const planDatesRef = ref(database, `plans/${data.key}/planDates`)
@@ -61,6 +62,12 @@
       const planDateRef = ref(database, `plans/${data.key}/planDates/${key}`)
       await set(planDateRef, { title, date: date.toISOString() })
     }
+  }
+
+  async function handlePlanDateEditorDelete(e: CustomEvent<PlanDateDeletePayload>) {
+    const { key } = e.detail
+    const planDateRef = ref(database, `plans/${data.key}/planDates/${key}`)
+    await set(planDateRef, null)
   }
 
   async function handlePlanEventEditorSave(payload: PlanEventSavePayload, planDate: PlanDateWithKey) {
@@ -94,6 +101,7 @@
         planDate={planDate}
         key={planDate.key}
         on:save={handlePlanDateEditorSubmit}
+        on:delete={handlePlanDateEditorDelete}
       />
       <ul>
         {#if planEvents[planDate.key] !== undefined}

@@ -75,10 +75,12 @@
     />
     <button type="submit">{key === undefined ? 'Add' : 'Update'}</button>
   </form>
-  <button
-    type="button"
-    on:click="{handleDelete}"
-  >
-    delete
-  </button>
+  {#if key !== undefined}
+    <button
+      type="button"
+      on:click="{handleDelete}"
+    >
+      Delete
+    </button>
+  {/if}
 </div>
