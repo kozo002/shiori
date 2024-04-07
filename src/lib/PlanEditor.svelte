@@ -3,8 +3,10 @@
     title: string
   }
 </script>
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import Button from '$lib/components/ui/button/button.svelte'
 
   type Props = {
     title: string
@@ -27,5 +29,5 @@
     type="text"
     bind:value="{title}"
   />
-  <button type="submit">Save</button>
+  <Button type="submit">Save</Button>
 </form>

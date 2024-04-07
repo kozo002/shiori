@@ -9,11 +9,13 @@
     key: string
   }
 </script>
+
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
-  import type { Plan, PlanDate } from '$lib/types'
+  import type { PlanDate } from '$lib/types'
   import { toDateInputValue } from '$lib/utils/toDateInputValue'
   import { toDate } from '$lib/utils/toDate'
+  import Button from './components/ui/button/button.svelte'
 
   type Props = {
     planDate: PlanDate | undefined
@@ -73,14 +75,14 @@
       type="date"
       bind:value="{date}"
     />
-    <button type="submit">{planDate === undefined ? 'Add' : 'Update'}</button>
+    <Button type="submit">{planDate === undefined ? 'Add' : 'Update'}</Button>
   </form>
   {#if key !== undefined}
-    <button
+    <Button
       type="button"
       on:click="{handleDelete}"
     >
       Delete
-    </button>
+    </Button>
   {/if}
 </div>

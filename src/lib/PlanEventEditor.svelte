@@ -14,6 +14,7 @@
   import { createEventDispatcher } from 'svelte'
   import type { PlanEvent } from '$lib/types'
   import { toDate } from '$lib/utils/toDate'
+  import Button from '$lib/components/ui/button/button.svelte'
 
   const dispatchEvent = createEventDispatcher<{
     save: PlanEventSavePayload
@@ -73,14 +74,14 @@
       type="time"
       bind:value="{time}"
     />
-    <button type="submit">{key === undefined ? 'Add' : 'Update'}</button>
+    <Button type="submit">{key === undefined ? 'Add' : 'Update'}</Button>
   </form>
   {#if key !== undefined}
-    <button
+    <Button
       type="button"
       on:click="{handleDelete}"
     >
       Delete
-    </button>
+    </Button>
   {/if}
 </div>
