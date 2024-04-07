@@ -4,6 +4,10 @@
     time: Date
     key?: string
   }
+
+  export type PlanEventDeletePayload = {
+    key: string
+  }
 </script>
 
 <script lang="ts">
@@ -13,6 +17,7 @@
 
   const dispatchEvent = createEventDispatcher<{
     save: PlanEventSavePayload
+    delete: PlanEventDeletePayload
   }>()
 
   type Props = {
@@ -49,16 +54,31 @@
       time = ''
     }
   }
+
+  function handleDelete(e: Event) {
+    e.preventDefault()
+    if (key !== undefined && window.confirm('Are you sure you want to delete this event?')) {
+      dispatchEvent('delete', { key })
+    }
+  }
 </script>
 
-<form on:submit="{handleSubmit}">
-  <input
-    type="text"
-    bind:value="{title}"
-  />
-  <input
-    type="time"
-    bind:value="{time}"
-  />
-  <button type="submit">Save</button>
-</form>
+<div style="display: flex">
+  <form on:submit="{handleSubmit}">
+    <input
+      type="text"
+      bind:value="{title}"
+    />
+    <input
+      type="time"
+      bind:value="{time}"
+    />
+    <button type="submit">{key === undefined ? 'Add' : 'Update'}</button>
+  </form>
+  <button
+    type="button"
+    on:click="{handleDelete}"
+  >
+    delete
+  </button>
+</div>
