@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte'
   import type { PlanDate } from '$lib/types'
   import { toDateInputValue } from '$lib/utils/toDateInputValue'
   import { toDate } from '$lib/utils/toDate'

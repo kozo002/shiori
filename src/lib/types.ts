@@ -6,4 +6,10 @@ export type Plan = {
 export type PlanDate = {
   title: string
   date: Date | string
+  planEvents: { [key in string]: PlanEvent } | undefined
+}
+
+export type PlanEvent = {
+  title: string
+  time: Date | string
 }
