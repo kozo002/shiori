@@ -63,7 +63,7 @@
   }
 </script>
 
-<div style="display: flex">
+<div class="flex">
   <form on:submit="{handleSubmit}">
     <input
       type="text"
