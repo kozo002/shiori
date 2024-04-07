@@ -12,6 +12,7 @@
   import { toDate } from '$lib/utils/toDate'
 
   import PlanEditor from '$lib/PlanEditor.svelte';
+  import type { PlanEditorSavePayload } from '$lib/PlanEditor.svelte'
   import PlanDateEditor from '$lib/PlanDateEditor.svelte'
   import type { PlanDateSavePayload, PlanDateDeletePayload } from '$lib/PlanDateEditor.svelte';
   import PlanEventEditor from '$lib/PlanEventEditor.svelte'
@@ -47,9 +48,10 @@
     }
   }
 
-  async function handlePlanEditorSubmit(e: CustomEvent<{ planTitle: string }>) {
+  async function handlePlanEditorSubmit(e: CustomEvent<PlanEditorSavePayload>) {
+    const { title } = e.detail
     const planRef = ref(database, `plans/${data.key}`)
-    await set(planRef, { title: e.detail.planTitle })
+    await set(planRef, { title })
   }
 
   async function handlePlanDateEditorSubmit(e: CustomEvent<PlanDateSavePayload>) {
@@ -91,7 +93,7 @@
 
 {#if plan !== undefined}
   <PlanEditor
-    planTitle={plan.title}
+    title={plan.title}
     on:save={handlePlanEditorSubmit}
   />
 
